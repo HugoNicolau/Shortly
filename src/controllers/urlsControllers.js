@@ -20,7 +20,6 @@ export async function getUrlId(req, res){
     try{
         const url = await connectionDB.query(`SELECT id, short_url, url FROM urls WHERE id=$1;`,[id]);
     
-        console.log(url)
         if(!url || url.rowCount<1){
             return res.sendStatus(404);
         }
