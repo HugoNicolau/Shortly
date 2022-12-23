@@ -10,7 +10,7 @@ export async function postUrl(req, res){
 
     }catch(err){
         console.log(err);
-        res.sendStatus(500);
+        return res.sendStatus(500);
     }
 
 }

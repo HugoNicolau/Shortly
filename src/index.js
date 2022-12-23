@@ -7,6 +7,7 @@ dotenv.config();
 import authRoutes from "./routes/authRoutes.js";
 import urlRoutes from "./routes/urlRoutes.js";
 import usersRoutes from "./routes/usersRoutes.js";
+import rankingRoutes from "./routes/rankingRoutes.js"
 
 
 
@@ -18,7 +19,7 @@ app.use(cors());
 app.use(authRoutes);
 app.use(urlRoutes);
 app.use(usersRoutes);
-
+app.use(rankingRoutes);
 
 
 app.listen(port, ()=> console.log(`Server running in port: ${port}`));
