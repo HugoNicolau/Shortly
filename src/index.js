@@ -12,7 +12,6 @@ import rankingRoutes from "./routes/rankingRoutes.js"
 
 
 const app = express();
-const port = process.env.PORT;
 app.use(express.json());
 app.use(cors());
 
@@ -22,4 +21,5 @@ app.use(usersRoutes);
 app.use(rankingRoutes);
 
 
+const port = process.env.PORT;
 app.listen(port, ()=> console.log(`Server running in port: ${port}`));
