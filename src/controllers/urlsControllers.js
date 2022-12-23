@@ -51,3 +51,25 @@ export async function openUrl(req, res){
         return res.sendStatus(500);
     }
 }
+
+export async function deleteUrl(req, res){
+    const urlId = req.params.id;
+    const userId = res.locals.userId;
+  try{
+    const byUrl = await connectionDB.query(`SELECT * FROM urls WHERE id=$1;`,[urlId]);
+    if(byUrl.rowCount<1){
+        return res.sendStatus(404);
+    }
+    if(String(userId) !== String(byUrl.rows[0].user_id)){
+        return res.sendStatus(401);
+    }
+   
+    await connectionDB.query(`DELETE FROM urls WHERE id=$1;`,[urlId]);
+    return res.sendStatus(204);
+
+  }catch(err){
+    console.log(err);
+    return res.sendStatus(500);
+  }
+
+}
