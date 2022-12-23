@@ -13,5 +13,22 @@ export async function postUrl(req, res){
         res.sendStatus(500);
     }
 
+}
 
+export async function getUrlId(req, res){
+    const id = req.params.id;
+    try{
+        const url = await connectionDB.query(`SELECT id, short_url, url FROM urls WHERE id=$1;`,[id]);
+    
+        console.log(url)
+        if(!url || url.rowCount<1){
+            return res.sendStatus(404);
+        }
+        return res.status(200).send(url.rows[0]);
+
+    }catch(err){
+        console.log(err);
+        return res.sendStatus(500);
+    }
+    
 }
