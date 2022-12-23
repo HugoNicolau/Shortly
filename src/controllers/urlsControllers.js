@@ -44,6 +44,11 @@ export async function openUrl(req, res){
         const id = originalUrl.rows[0].id;
         const newVisitCount = Number(originalUrl.rows[0].visit_count) +1;
         await connectionDB.query(`UPDATE urls SET visit_count=$1 WHERE id=$2 `,[newVisitCount, id]);
+        const userId = originalUrl.rows[0].user_id;
+        const userCount = await connectionDB.query(`SELECT * FROM users WHERE id=$1;`,[userId]);
+        const newCount = (userCount.rows[0].user_count) +1;
+        await connectionDB.query(`UPDATE users SET user_count=$1 WHERE id=$2;`,[newCount,userId]);
+
         res.redirect(301, newUrl);
 
     }catch(err){

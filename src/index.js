@@ -4,8 +4,10 @@ import cors from 'cors';
 import dotenv from 'dotenv';
 dotenv.config();
 
-import authRoutes from "./routes/authRoutes.js"
-import urlRoutes from "./routes/urlRoutes.js"
+import authRoutes from "./routes/authRoutes.js";
+import urlRoutes from "./routes/urlRoutes.js";
+import usersRoutes from "./routes/usersRoutes.js";
+
 
 
 const app = express();
@@ -15,6 +17,7 @@ app.use(cors());
 
 app.use(authRoutes);
 app.use(urlRoutes);
+app.use(usersRoutes);
 
 
 

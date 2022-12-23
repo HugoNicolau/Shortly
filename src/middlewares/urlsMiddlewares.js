@@ -20,7 +20,7 @@ export async function validateSchemaUrls(req, res, next){
 
     try{
         const confirmToken = await connectionDB.query(`SELECT * FROM sessions WHERE token=$1;`,[token]);
-        if(confirmToken.rowCount>1){
+        if(confirmToken.rowCount<1){
             return res.sendStatus(401);
         }
         const shortUrl = nanoid();
@@ -51,7 +51,7 @@ export async function validateDelete(req, res, next){
     }
     try{
         const confirmToken = await connectionDB.query(`SELECT * FROM sessions WHERE token=$1;`,[token]);
-        if(confirmToken.rowCount>1){
+        if(confirmToken.rowCount<1){
             return res.sendStatus(401);
         }
         const userId = confirmToken.rows[0].user_id;
