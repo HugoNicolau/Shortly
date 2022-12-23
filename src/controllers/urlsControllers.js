@@ -32,3 +32,22 @@ export async function getUrlId(req, res){
     }
     
 }
+
+export async function openUrl(req, res){
+    const url = req.params.shortUrl;
+    try{
+        const originalUrl = await connectionDB.query(`SELECT * FROM urls WHERE short_url=$1;`,[url]);
+        if(!originalUrl || originalUrl.rowCount<1){
+            return res.sendStatus(404);
+        }
+        const newUrl = originalUrl.rows[0].url;
+        const id = originalUrl.rows[0].id;
+        const newVisitCount = Number(originalUrl.rows[0].visit_count) +1;
+        await connectionDB.query(`UPDATE urls SET visit_count=$1 WHERE id=$2 `,[newVisitCount, id]);
+        res.redirect(301, newUrl);
+
+    }catch(err){
+        console.log(err);
+        return res.sendStatus(500);
+    }
+}
