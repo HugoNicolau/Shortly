@@ -31,7 +31,7 @@ export async function postSignIn(req, res){
         return res.status(200).send(token);
     }catch(err){
         console.log(err);
-        res.sendStatus(500);
+        return res.sendStatus(500);
     }
 
 }
