@@ -1,7 +1,14 @@
 import { Router } from "express";
-import { validateDelete, validateSchemaUrls } from "../middlewares/urlsMiddlewares.js";
-import { postUrl, getUrlId, openUrl, deleteUrl } from "../controllers/urlsControllers.js";
-
+import {
+  validateDelete,
+  validateSchemaUrls,
+} from "../middlewares/urlsMiddlewares.js";
+import {
+  postUrl,
+  getUrlId,
+  openUrl,
+  deleteUrl,
+} from "../controllers/urlsControllers.js";
 
 const router = Router();
 
